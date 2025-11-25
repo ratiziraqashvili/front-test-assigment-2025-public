@@ -3,11 +3,13 @@ import React from "react";
 interface ButtonProps {
   text: string;
   isSelected: boolean;
+  onClick: () => void;
 }
 
-export default function Button({ text, isSelected }: ButtonProps) {
+export default function Button({ text, isSelected, onClick }: ButtonProps) {
   return (
     <button
+      onClick={onClick}
       className={
         `px-4 py-2 rounded-md font-semibold border transition ` +
         (isSelected
