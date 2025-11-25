@@ -6,7 +6,7 @@ export type Campaign = {
 
 export type Metrics = {
     campaignId: string;
-    timeStamp: string;
+    timestamp: string;
     impressions: number;
     clicks: number;
     revenue: number;

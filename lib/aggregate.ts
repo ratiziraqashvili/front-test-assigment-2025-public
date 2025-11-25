@@ -1,7 +1,7 @@
-import { Campaign, Metrics } from "../types";
+import type { Campaign, Metrics } from "../types";
 
-const getDateKey = (timeStamp: string, period: 'hourly' | 'daily' | 'weekly' | 'monthly'): string => {
-    const date = new Date(timeStamp);
+const getDateKey = (timestamp: string, period: 'hourly' | 'daily' | 'weekly' | 'monthly'): string => {
+    const date = new Date(timestamp);
 
     switch (period) {
         case 'hourly':
@@ -24,14 +24,14 @@ const aggregateMetrics = (
     campaigns: Campaign[],
     period: 'hourly' | 'daily' | 'weekly' | 'monthly'
 ): Metrics[] => {
-    const grouped = metrics.reduce((acc, metric) => {
-        const dateKey = getDateKey(metric.timeStamp, period);
+    const grouped = metrics.reduce((acc, metric) => {        
+        const dateKey = getDateKey(metric.timestamp, period);
         const key = `${metric.campaignId}-${dateKey}`;
 
         if (!acc[key]) {
             acc[key] = {
                 campaignId: metric.campaignId,
-                timeStamp: dateKey,
+                timestamp: dateKey,
                 impressions: 0,
                 clicks: 0,
                 revenue: 0,

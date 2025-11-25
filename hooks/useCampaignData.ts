@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CampaignData } from "../types";
+import type { CampaignData } from "../types";
 import { loadData } from "../lib/loadData";
 
 export const useCampaignData = () => {
