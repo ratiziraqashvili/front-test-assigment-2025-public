@@ -1,18 +1,11 @@
 import "./App.css";
 import { Button } from "../components/button";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Charts } from "../components/charts";
 import { Header } from "../components/header";
 import { Card } from "../components/card";
 import { Table } from "../components/table";
 import { useCampaignData } from "../hooks/useCampaignData";
-import {
-  aggregateDaily,
-  aggregateHourly,
-  aggregateMonthly,
-  aggregateWeekly,
-} from "../lib/aggregate";
-import type { Metrics } from "../types";
 
 function App() {
   const [selected, setSelected] = useState("Hourly");
@@ -21,7 +14,7 @@ function App() {
   const { data, loading, error } = useCampaignData();
 
   return (
-    <div className="bg-gray-200 h-screen w-full text-bold flex flex-col justify-center items-center gap-8">
+    <div className="bg-gray-200 h-full w-full text-bold flex flex-col justify-center items-center gap-8 py-5">
       <div className="rounded-xl bg-white w-[80%] flex p-6 justify-center md:justify-between items-center gap-3 md:gap-0 flex-col md:flex-row">
         <div className="font-semibold text-sky-600 text-2xl flex text-center">
           Analytics Dashboard
@@ -51,7 +44,7 @@ function App() {
       <Card>
         <Header text="Data Table" />
         <div className="flex justify-center">
-          <Table period={selected} />
+          <Table period={selected} data={data} />
         </div>
       </Card>
     </div>
