@@ -49,7 +49,7 @@ const aggregateMetrics = (
 
     return Object.values(grouped).map(({ count, ...metric }) => ({
         ...metric,
-        revenue: Math.round(metric.revenue * 100) / 100
+        revenue: (metric.revenue.toFixed(2)) as unknown as number
     }));
 };
 

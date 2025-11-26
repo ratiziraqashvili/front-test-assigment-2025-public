@@ -6,7 +6,7 @@ interface ButtonProps {
   onClick: () => void;
 }
 
-export default function Button({ text, isSelected, onClick }: ButtonProps) {
+export function Button({ text, isSelected, onClick }: ButtonProps) {
   return (
     <button
       onClick={onClick}

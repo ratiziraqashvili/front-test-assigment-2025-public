@@ -1,7 +1,9 @@
 import "./App.css";
-import Button from "../components/button";
+import { Button } from "../components/button";
 import { useState } from "react";
-import Charts from "../components/charts";
+import { Charts } from "../components/charts";
+import { Header } from "../components/header";
+import { Card } from "../components/card";
 
 function App() {
   const [selected, setSelected] = useState("Hourly");
@@ -24,13 +26,15 @@ function App() {
           ))}
         </div>
       </div>
-      <div className="rounded-xl bg-white w-[80%] p-6 flex flex-col">
-        <h1 className="font-semibold text-xl">Timeline Chart</h1>
+      <Card>
+        <Header text="Timeline Chart" />
         <div className="flex justify-center">
           <Charts period={selected} />
         </div>
-      </div>
-      <div className="bg-white w-[80%]">3</div>
+      </Card>
+      <Card>
+        <Header text="Data Table" />
+      </Card>
     </div>
   );
 }
