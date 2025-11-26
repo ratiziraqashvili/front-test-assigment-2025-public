@@ -1,13 +1,24 @@
 import "./App.css";
 import { Button } from "../components/button";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Charts } from "../components/charts";
 import { Header } from "../components/header";
 import { Card } from "../components/card";
+import { Table } from "../components/table";
+import { useCampaignData } from "../hooks/useCampaignData";
+import {
+  aggregateDaily,
+  aggregateHourly,
+  aggregateMonthly,
+  aggregateWeekly,
+} from "../lib/aggregate";
+import type { Metrics } from "../types";
 
 function App() {
   const [selected, setSelected] = useState("Hourly");
   const buttonsOptions = ["Hourly", "Daily", "Weekly", "Monthly"];
+
+  const { data, loading, error } = useCampaignData();
 
   return (
     <div className="bg-gray-200 h-screen w-full text-bold flex flex-col justify-center items-center gap-8">
@@ -29,11 +40,19 @@ function App() {
       <Card>
         <Header text="Timeline Chart" />
         <div className="flex justify-center">
-          <Charts period={selected} />
+          <Charts
+            data={data}
+            loading={loading}
+            error={error}
+            period={selected}
+          />
         </div>
       </Card>
       <Card>
         <Header text="Data Table" />
+        <div className="flex justify-center">
+          <Table period={selected} />
+        </div>
       </Card>
     </div>
   );

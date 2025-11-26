@@ -6,15 +6,16 @@ import {
   aggregateWeekly,
   aggregateMonthly,
 } from "../lib/aggregate";
-import type { Metrics } from "../types";
+import type { CampaignData, Metrics } from "../types";
 
 interface ChartsProps {
   period: string;
+  error: string | null;
+  loading: boolean;
+  data: CampaignData | null;
 }
 
-export function Charts({ period }: ChartsProps) {
-  const { data, loading, error } = useCampaignData();
-
+export function Charts({ period, error, loading, data }: ChartsProps) {
   const aggregated = useMemo<Metrics[]>(() => {
     if (!data) return [];
 
@@ -31,14 +32,6 @@ export function Charts({ period }: ChartsProps) {
         return [];
     }
   }, [data, period]);
-
-  const timeline = aggregated.reduce((acc, metric) => {
-    if(!acc[metric.timestamp]) {
-        acc[metric.timestamp] = 0;
-    }
-    acc[metric.timestamp] += metric.revenue;
-    return acc;
-  }, {} as Record<string, number>);
 
   const chartData = aggregated
     .sort(
